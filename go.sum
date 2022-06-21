@@ -3,5 +3,9 @@ github.com/carlmjohnson/exitcode v0.20.2 h1:vE6rmkCGNA4kO4m1qwWIa77PKlUBVg46cNjs
 github.com/carlmjohnson/exitcode v0.20.2/go.mod h1:MZ6ThCDx517DQcrpYnnns1pLh8onjFl+B/AsrOrdmpc=
 github.com/carlmjohnson/flagx v0.22.2 h1:UXf7gL4Ffv5RIH/HKp8CGNzDyopgezFLrDO1m4F8jWc=
 github.com/carlmjohnson/flagx v0.22.2/go.mod h1:obobISvBnxgEXPLBITVXhRUOlSlzza1SGt34M64CPJc=
+github.com/carlmjohnson/requests v0.22.3 h1:ip16AKXNYuArdw9L5/1mL+mNorlZO5XhkLg617yOumc=
+github.com/carlmjohnson/requests v0.22.3/go.mod h1:iTsaX9TdFg2+L4WtZO/HFyDMPEfBnogV3i4A4gjDnvs=
 github.com/carlmjohnson/versioninfo v0.22.3 h1:1vZVPgSzMG/TEj/W0LatvQllSwG35w/KI7+7uH9DeGI=
 github.com/carlmjohnson/versioninfo v0.22.3/go.mod h1:QT9mph3wcVfISUKd0i9sZfVrPviHuSF+cUtLjm2WSf8=
+golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f h1:OfiFi4JbukWwe3lzw+xunroH1mnC1e2Gy5cxNJApiSY=
+golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
