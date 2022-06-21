@@ -43,7 +43,7 @@ func (app *appEnv) ParseArgs(args []string) error {
 	formID := fl.String("form-id", "", "`id` for Netlify form")
 	cookie := fl.String("cookie", "", "`_nf-auth` value for Netlify cookie")
 	fl.DurationVar(&http.DefaultClient.Timeout, "timeout", 5*time.Second, "timeout for connecting to Netlify")
-
+	age := fl.Duration("age", 5*time.Minute, "minimum age for spam comment to purge")
 	fl.Usage = func() {
 		fmt.Fprintf(fl.Output(), `Netlify Spam Purge - %s
 
@@ -78,12 +78,14 @@ Options:
 			*appID, *formID,
 		).
 		Cookie("_nf-auth", *cookie)
+	app.before = time.Now().Add(-*age)
 	return nil
 }
 
 type appEnv struct {
 	*log.Logger
-	cl *requests.Builder
+	cl     *requests.Builder
+	before time.Time
 }
 
 func (app *appEnv) Exec() (err error) {
@@ -91,29 +93,46 @@ func (app *appEnv) Exec() (err error) {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 
-	for {
-		entries, err := app.Get(ctx)
-		if err != nil {
-			return err
-		}
-		if len(entries) == 0 {
-			return nil
-		}
-		if err = app.Purge(ctx, entries); err != nil {
-			return err
-		}
+	entries, err := app.Get(ctx)
+	if err != nil {
+		return err
 	}
+	{
+		filteredEntries := entries[:0]
+		for _, entry := range entries {
+			if entry.CreatedAt.Before(app.before) {
+				filteredEntries = append(filteredEntries, entry)
+			}
+		}
+		entries = filteredEntries
+		app.Printf("%d entries from before %s", len(entries), app.before.Format(time.RFC1123))
+	}
+	if err = app.Purge(ctx, entries); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (app *appEnv) Get(ctx context.Context) (entries NFResponse, err error) {
-	err = app.cl.Clone().
-		Param("state", "spam").
-		Param("page", "0").
-		Param("per_page", "100").
-		ToJSON(&entries).
-		Fetch(ctx)
-	app.Printf("got %d entries", len(entries))
-	return
+	n := 1
+	for {
+		var req NFResponse
+		err = app.cl.Clone().
+			Param("state", "spam").
+			Param("per_page", "100").
+			ParamInt("page", n).
+			ToJSON(&req).
+			Fetch(ctx)
+		if err != nil {
+			return nil, err
+		}
+		app.Printf("listing %d entries", len(req))
+		if len(req) == 0 {
+			return entries, nil
+		}
+		entries = append(entries, req...)
+		n++
+	}
 }
 
 func (app *appEnv) Purge(ctx context.Context, entries NFResponse) (err error) {

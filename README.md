@@ -22,7 +22,7 @@ GOBIN="$(pwd)" go install github.com/carlmjohnson/nfspampurge@latest
 
 ```
 $ nfspampurge -h
-Netlify Spam Purge - devel
+Netlify Spam Purge - v0.22.1
 
 Deletes all messages in Netlify's spam box.
 Options may be passed as env vars like NFSPAMPURGE_APP_ID.
@@ -36,6 +36,9 @@ Usage:
         nfspampurge [options]
 
 Options:
+Options:
+  -age duration
+        minimum age for spam comment to purge (default 5m0s)
   -app-id id
         id for Netlify app
   -cookie _nf-auth
@@ -48,10 +51,13 @@ Options:
         timeout for connecting to Netlify (default 5s)
 
 $ nfspampurge
-nfspampurge 2022/06/21 10:36:37 got 55 entries
-nfspampurge 2022/06/21 10:36:37 purging 5de5d0d7cc558333db05a492 from Tue, 03 Dec 2019 03:04:55 UTC
-nfspampurge 2022/06/21 10:36:37 purging 5de4123fc25e8d9a36938999 from Sun, 01 Dec 2019 19:19:27 UTC
-nfspampurge 2022/06/21 10:36:37 purging 5de35d6eb4bbcd961eefa221 from Sun, 01 Dec 2019 06:27:58 UTC
-…
-nfspampurge 2022/06/21 10:36:51 got 0 entries
+nfspampurge 2022/06/21 13:06:24 purge.go:92: starting
+nfspampurge 2022/06/21 13:06:25 purge.go:129: listing 6 entries
+nfspampurge 2022/06/21 13:06:25 purge.go:129: listing 0 entries
+nfspampurge 2022/06/21 13:06:25 purge.go:108: 5 entries from before Tue, 21 Jun 2022 12:41:24 EDT
+nfspampurge 2022/06/21 13:06:25 purge.go:141: purging 62b1f4a3ae850c0ff1cdcaef from Tue, 21 Jun 2022 16:41:07 UTC
+nfspampurge 2022/06/21 13:06:25 purge.go:141: purging 62b1f1cd0108fd0e4aa5e9b7 from Tue, 21 Jun 2022 16:29:01 UTC
+nfspampurge 2022/06/21 13:06:25 purge.go:141: purging 62b1ec8f84d3d5091c982a98 from Tue, 21 Jun 2022 16:06:39 UTC
+nfspampurge 2022/06/21 13:06:26 purge.go:141: purging 62b1eab0ad935f0982b9135a from Tue, 21 Jun 2022 15:58:40 UTC
+nfspampurge 2022/06/21 13:06:26 purge.go:141: purging 62b1e3b72600930bf32a0692 from Tue, 21 Jun 2022 15:28:55 UTC
 ```
