@@ -138,7 +138,7 @@ func (app *appEnv) Get(ctx context.Context) (entries NFResponse, err error) {
 func (app *appEnv) Purge(ctx context.Context, entries NFResponse) (err error) {
 	for _, entry := range entries {
 		id := entry.ID
-		app.Println("purging", id, "from", entry.CreatedAt.Format(time.RFC1123))
+		app.Println("purging", id, "from", entry.CreatedAt.Local().Format(time.RFC1123))
 		err = app.cl.Clone().
 			Pathf("/access-control/bb-api/api/v1/submissions/%s", id).
 			Delete().
