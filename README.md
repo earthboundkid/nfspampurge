@@ -1,4 +1,4 @@
-# go-cli [![GoDoc](https://godoc.org/github.com/carlmjohnson/nfspampurge?status.svg)](https://godoc.org/github.com/carlmjohnson/nfspampurge) [![Go Report Card](https://goreportcard.com/badge/github.com/carlmjohnson/nfspampurge)](https://goreportcard.com/report/github.com/carlmjohnson/nfspampurge)
+# Netlify Spam Purge [![GoDoc](https://godoc.org/github.com/carlmjohnson/nfspampurge?status.svg)](https://godoc.org/github.com/carlmjohnson/nfspampurge) [![Go Report Card](https://goreportcard.com/badge/github.com/carlmjohnson/nfspampurge)](https://goreportcard.com/report/github.com/carlmjohnson/nfspampurge)
 
 Deletes all messages in Netlify's spam box.
 
