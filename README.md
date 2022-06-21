@@ -2,7 +2,11 @@
 
 Deletes all messages in Netlify's spam box.
 
-Usage: Go to Netlify's spam page. Remove any non-spam from the spam box. Go to the network
+Usage: Go to Netlify's spam page. Remove any non-spam from the spam box. Get the cookie value by entering this in the developer console:
+
+```
+copy(JSON.parse(localStorage.getItem("nf-session")).access_token)
+```
 
 ## Installation
 
