@@ -33,7 +33,7 @@ func CLI(args []string) error {
 func (app *appEnv) ParseArgs(args []string) error {
 	fl := flag.NewFlagSet(AppName, flag.ContinueOnError)
 
-	app.Logger = log.New(os.Stderr, AppName+" ", log.LstdFlags|log.Lshortfile)
+	app.Logger = log.New(os.Stderr, AppName+" ", log.LstdFlags)
 	flagx.BoolFunc(fl, "silent", "suppress logging", func() error {
 		app.Logger.SetOutput(io.Discard)
 		return nil
