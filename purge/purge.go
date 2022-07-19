@@ -41,7 +41,7 @@ func (app *appEnv) ParseArgs(args []string) error {
 
 	appID := fl.String("app-id", "", "`id` for Netlify app")
 	formID := fl.String("form-id", "", "`id` for Netlify form")
-	cookie := fl.String("cookie", "", "`_nf-auth` value for Netlify cookie")
+	cookie := fl.String("cookie", "", "personal access `token` value for Netlify cookie")
 	fl.DurationVar(&http.DefaultClient.Timeout, "timeout", 5*time.Second, "timeout for connecting to Netlify")
 	age := fl.Duration("age", 5*time.Minute, "minimum age for spam comment to purge")
 	fl.Usage = func() {
@@ -50,9 +50,7 @@ func (app *appEnv) ParseArgs(args []string) error {
 Deletes all messages in Netlify's spam box.
 Options may be passed as env vars like NFSPAMPURGE_APP_ID.
 
-Get the cookie value by running this in the dev console:
-
-copy(JSON.parse(localStorage.getItem("nf-session")).access_token)
+Get the cookie value by creating a personal access token at https://app.netlify.com/user/applications#personal-access-tokens
 
 Usage:
 

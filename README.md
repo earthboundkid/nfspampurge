@@ -35,9 +35,7 @@ Netlify Spam Purge - v0.22.2
 Deletes all messages in Netlify's spam box.
 Options may be passed as env vars like NFSPAMPURGE_APP_ID.
 
-Get the cookie value by running this in the dev console:
-
-copy(JSON.parse(localStorage.getItem("nf-session")).access_token)
+Get the cookie value by creating a personal access token at https://app.netlify.com/user/applications#personal-access-tokens
 
 Usage:
 
@@ -48,8 +46,8 @@ Options:
         minimum age for spam comment to purge (default 5m0s)
   -app-id id
         id for Netlify app
-  -cookie _nf-auth
-        _nf-auth value for Netlify cookie
+  -cookie token
+        personal access token value for Netlify cookie
   -form-id id
         id for Netlify form
   -silent
