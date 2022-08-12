@@ -6,13 +6,8 @@ Usage:
 
 - Go to Netlify's spam page.
 - Remove any non-spam from the spam box.
-- Get the cookie value by entering this in the developer console:
-
-```
-copy(JSON.parse(localStorage.getItem("nf-session")).access_token)
-```
-
-- Run `nfspampurge -cookie COOKIE_VALUE`
+- Get the cookie value by creating a personal access token at https://app.netlify.com/user/applications#personal-access-tokens
+- Run `nfspampurge -cookie COOKIE_VALUE` or set the cookie value to the NFSPAMPURGE_COOKIE environment variable.
 
 To prevent new incoming messages from being deleted before being reviewed, by default messages must be at least 5 minutes old to be purged.
 
